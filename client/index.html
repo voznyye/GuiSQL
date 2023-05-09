@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Column Selection Form</title>
+</head>
+<body>
+<form action="../functions/process.php" method="post">
+    <label for="columns">Select Columns:</label>
+    <select name="columns[]" multiple>
+        <?php include 'get_columns.php'; ?>
+    </select>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
