@@ -19,9 +19,16 @@
         var age = item.age;
 
         // Display the data on the page
-        document.write("<h3>Name: " + name + "</h3>")
-        document.write("<h3>Surname: " + surname + "</h3>");
-        document.write("<h3>Age: " + age + "</h3>");
+        if (name) {
+            document.write("<h4>=========================</p>")
+            document.write("<h4>Name: " + name + "</h4>")
+        }
+        if (surname) {
+            document.write("<h4>Surname: " + surname + "</h4>");
+        }
+        if (age) {
+            document.write("<h4>Age: " + age + "</h4>");
+        }
     });
 </script>
 </body>
