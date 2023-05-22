@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+<script>
+    // Get the encoded JSON data from the URL parameter
+    var encodedData = decodeURIComponent(window.location.search.replace("?data=", ""));
+
+    // Decode the JSON data
+    var jsonData = JSON.parse(encodedData);
+
+    // Access the retrieved data
+    jsonData.forEach(function(item) {
+        var name = item.name;
+        var surname = item.surname;
+        var age = item.age;
+
+        // Display the data on the page
+        document.write("<h3>Name: " + name + "</h3>")
+        document.write("<h3>Surname: " + surname + "</h3>");
+        document.write("<h3>Age: " + age + "</h3>");
+    });
+</script>
+</body>
+</html>
