@@ -13,6 +13,9 @@
     var jsonData = JSON.parse(encodedData);
 
     // Access the retrieved data
+
+    document.write("<h4>=========================</p>") // Display first row of =
+
     jsonData.forEach(function(item) {
         var name = item.name;
         var surname = item.surname;
@@ -20,7 +23,6 @@
 
         // Display the data on the page
         if (name) {
-            document.write("<h4>=========================</p>")
             document.write("<h4>Name: " + name + "</h4>")
         }
         if (surname) {
@@ -29,6 +31,7 @@
         if (age) {
             document.write("<h4>Age: " + age + "</h4>");
         }
+        document.write("<h4>=========================</p>")
     });
 </script>
 </body>
