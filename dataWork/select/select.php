@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $database = new SQLite3('Huel.db');
+    $database = new SQLite3('database/*.db');
 
     if (isset($_POST['number'])) {
         $number = $_POST['number'];
