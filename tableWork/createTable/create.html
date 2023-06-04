@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Table</title>
+</head>
+<body>
+<form method="POST" action="create.php">
+    <label for="column_names">Column Names:</label>
+    <input type="text" id="column_names" name="column_names[]" multiple>
+    <br>
+    <label for="column_types">Column Types:</label>
+    <input type="text" id="column_types" name="column_types[]" multiple>
+    <br>
+    <button type="submit">Create Table</button>
+</form>
+</body>
+</html>

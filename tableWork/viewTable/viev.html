@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Table</title>
+</head>
+<body>
+<h1>Table View</h1>
+
+<div id="table-data"></div>
+
+<script>
+    // Retrieve the encoded data from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get('data');
+
+    // Decode the JSON data
+    const decodedData = decodeURIComponent(encodedData);
+    const data = JSON.parse(decodedData);
+
+    // Extract the column names and rows
+    const columns = data.columns;
+    const rows = data.rows;
+
+    // Create the table HTML
+    let tableHTML = "<table>";
+
+    // Create the table header
+    tableHTML += "<tr>";
+    for (const column of columns) {
+        tableHTML += `<th>${column}</th>`;
+    }
+    tableHTML += "</tr>";
+
+    // Create the table rows
+    for (const row of rows) {
+        tableHTML += "<tr>";
+        for (const column of columns) {
+            tableHTML += `<td>${row[column]}</td>`;
+        }
+        tableHTML += "</tr>";
+    }
+
+    tableHTML += "</table>";
+
+    // Append the table HTML to the 'table-data' div
+    document.getElementById("table-data").innerHTML = tableHTML;
+</script>
+</body>
+</html>

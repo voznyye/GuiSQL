@@ -9,20 +9,27 @@
 
 <ul>
 
-  <h3>First step</h3>
-  <li><a href="database/getDB.php">Put database</a></li>
+  <?php if (isset($error)) { ?>
+  <p><?php echo $error; ?></p>
+  <?php } ?>
+  <form method="POST" enctype="multipart/form-data" action="database/upload.php">
+    <label for="database_file">Upload a database file:</label>
+    <input type="file" id="database_file" name="database_file" required>
+    <button type="submit">Upload</button>
+  </form>
+
 
   <h3>Work with data</h3>
-  <li><a href="dataWork/insert/insert.php">Insert Data</a></li>
-  <li><a href="dataWork/select/select.php">Select Data</a></li>
-  <li><a href="dataWork/update/update.php">Update Data</a></li>
-  <li><a href="dataWork/delete/delete.php">Delete Data</a></li>
+  <li><a href="dataWork/insert/insert.html">Insert Data</a></li>
+  <li><a href="dataWork/select/select.html">Select Data</a></li>
+  <li><a href="dataWork/update/update.html">Update Data</a></li>
+  <li><a href="dataWork/delete/delete.html">Delete Data</a></li>
 
   <h3>Work with tables</h3>
-  <li><a href="tableWork/createTable/create.php">Create table</a></li>
-  <li><a href="tableWork/updateTable/update.php">Update table</a></li>
-  <li><a href="tableWork/viewTable/view.php">View all tables</a></li>
-  <li><a href="tableWork/dropTable/drop.php">Drop Table</a></li>
+  <li><a href="tableWork/createTable/create.html">Create table</a></li>
+  <li><a href="tableWork/updateTable/update.html">Update table</a></li>
+  <li><a href="tableWork/viewTable/view.html">View all tables</a></li>
+  <li><a href="tableWork/dropTable/drop.html">Drop Table</a></li>
 </ul>
 </body>
 </html>

@@ -1,48 +1,54 @@
 <?php
+$database = new SQLite3('path/to/database.db');
 
-// Path to your SQLite database file
-$databaseFile = 'Huel.db';
+// Get the table name from the request
+$tableName = $_GET['table'];
 
-try {
-    // Connect to the SQLite database
-    $pdo = new PDO('sqlite:' . $databaseFile);
+// Get the columns for the specified table
+$columnsQuery = "PRAGMA table_info('$tableName')";
+$columnsResult = $database->query($columnsQuery);
 
-    // Query to retrieve all table names
-    $query = "SELECT name FROM sqlite_master WHERE type='table'";
+if ($columnsResult !== false) {
+    // Store the column names in an array
+    $columnNames = array();
+    while ($columnRow = $columnsResult->fetchArray()) {
+        $columnName = $columnRow['name'];
+        $columnNames[] = $columnName;
+    }
 
-    // Prepare and execute the query
-    $statement = $pdo->prepare($query);
-    $statement->execute();
+    // Query the table to get the rows
+    $query = "SELECT * FROM $tableName";
+    $result = $database->query($query);
 
-    // Fetch all table names
-    $tables = $statement->fetchAll(PDO::FETCH_COLUMN);
+    if ($result !== false) {
+        // Store the rows in an array
+        $rows = array();
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows[] = $row;
+        }
 
-    // Prepare the response array
-    $response = [
-        'tables' => $tables,
-    ];
+        // Close the database connection
+        $database->close();
 
-    // Convert the response array to JSON
-    $jsonResponse = json_encode($response, JSON_PRETTY_PRINT);
+        // Pass the column names and rows to the view.html file
+        $data = array(
+            'columns' => $columnNames,
+            'rows' => $rows
+        );
 
-    // Set the response headers
-    header('Content-Type: application/json');
+        // Convert the data to JSON format
+        $json_data = json_encode($data);
 
-    // Output the JSON response
-    echo $jsonResponse;
-} catch (PDOException $e) {
-    // Handle any database errors
-    $errorResponse = [
-        'error' => $e->getMessage(),
-    ];
+        // Encode the JSON data for URL
+        $encoded_data = urlencode($json_data);
 
-    // Convert the error response to JSON
-    $jsonError = json_encode($errorResponse, JSON_PRETTY_PRINT);
-
-    // Set the response headers
-    header('Content-Type: application/json');
-
-    // Output the JSON error response
-    echo $jsonError;
+        // Redirect to view.html with the encoded data as URL parameter
+        header("Location: view.html?data=$encoded_data");
+        exit();
+    } else {
+        echo "Error retrieving rows from table: $tableName";
+    }
+} else {
+    echo "Error retrieving columns for table: $tableName";
 }
 ?>
