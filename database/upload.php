@@ -13,20 +13,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // File uploaded successfully
             // Perform further processing with the uploaded file
 
-            // Redirect to a success page or display a success message
-            header("Location: success.html");
-            exit();
+            // Prepare the response data
+            $response = array(
+                'success' => true,
+                'filename' => $filename
+            );
+
+            // Set the appropriate headers for JSON and HTTP status code
+            http_response_code(200);
+            header('Content-Type: application/json');
+
+            // Send the JSON response
+            echo json_encode($response);
         } else {
             // Error moving the uploaded file
-            // Handle the error scenario
-            $error = 'Error moving the uploaded file.';
-            header("Location: error.html");
+            // Prepare the error response
+            $response = array(
+                'success' => false,
+                'error' => 'Error moving the uploaded file.'
+            );
+
+            // Set the appropriate headers for JSON and HTTP status code
+            http_response_code(500);
+            header('Content-Type: application/json');
+
+            // Send the JSON response
+            echo json_encode($response);
         }
     } else {
         // Error uploading the file
-        // Handle the error scenario
-        $error = 'Error uploading the file.';
-        header("Location: error.html");
-    }
+        // Prepare the error response
+        $response = array(
+            'success' => false,
+            'error' => 'Error uploading the file.'
+        );
+
+        // Set the appropriate headers for JSON and HTTP status code
+        http_response_code(400);
+        header('Content-Type: application/json');
+
+        // Send the JSON response
+        echo json_encode($response);
+    }    exit();
 }
 ?>

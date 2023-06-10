@@ -25,22 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $statement->execute();
 
             if ($result) {
-                // Redirect to success page
-                header("Location: success.html");
-                exit();
+                // Set the HTTP status code to 200 (OK)
+                http_response_code(200);
+                echo "Data updated successfully!";
             } else {
-                // Redirect to error page
-                header("Location: error.html");
-                exit();
+                // Set the HTTP status code to 500 (Internal Server Error)
+                http_response_code(500);
+                echo "Error updating data.";
             }
         } else {
-            // Redirect to error page
-            header("Location: error.html");
-            exit();
+            // Set the HTTP status code to 404 (Not Found)
+            http_response_code(404);
+            echo "Data not found.";
         }
+    } else {
+        // Set the HTTP status code to 400 (Bad Request)
+        http_response_code(400);
+        echo "Invalid request.";
     }
 }
 
 $database->close();
 ?>
-

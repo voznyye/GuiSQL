@@ -5,16 +5,10 @@
   <title>Insert Data</title>
 </head>
 <body>
+<h1>Insert Data</h1>
+
 <form method="POST" action="insert.php">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name">
-  <br>
-  <label for="surname">Surname:</label>
-  <input type="text" id="surname" name="surname">
-  <br>
-  <label for="age">Age:</label>
-  <input type="number" id="age" name="age">
-  <br>
+  <?php include 'generate_fields.php'; ?>
   <button type="submit">Insert</button>
 </form>
 </body>

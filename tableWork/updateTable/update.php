@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $columnValue = $columnValues[$i];
 
                 // Append each column name and value pair to the query
-                $query .= "$columnName = '$columnValue', ";
+                $query .= "$columnName = :value$i, ";
             }
 
             // Remove the trailing comma and space from the query
@@ -32,15 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Bind the ID parameter to the prepared statement
             $statement->bindValue(':id', $id, SQLITE3_INTEGER);
 
+            // Bind the column values as parameters
+            for ($i = 0; $i < count($columnNames); $i++) {
+                $columnValue = $columnValues[$i];
+                $statement->bindValue(":value$i", $columnValue, SQLITE3_TEXT);
+            }
+
             $result = $statement->execute();
 
             if ($result !== false) {
-                echo "Table updated successfully!";
+                http_response_code(200);
+                echo json_encode(array("message" => "Table updated successfully"));
             } else {
-                echo "Error updating table.";
+                http_response_code(500);
+                echo json_encode(array("message" => "Error updating table"));
             }
         } else {
-            echo "Mismatched number of column names and values.";
+            http_response_code(400);
+            echo json_encode(array("message" => "Mismatched number of column names and values"));
         }
     }
 }

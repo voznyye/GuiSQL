@@ -2,67 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Select Data</title>
 </head>
 <body>
-<form method="POST">
-    <label for="number">Enter a guy ID or leave empty:</label>
-    <input type="number" id="number" name="number">
-    <br>
-    <label for="columns">Select columns:</label>
-    <select id="columns" name="columns">
-        <option value="*">All</option>
-        <option value="name">Name</option>
-        <option value="surname">Surname</option>
-        <option value="age">Age</option>
-    </select>
-    <br>
-    <button type="submit">Submit</button>
-</form>
-</body>
-</html>
-
+<h1>Select Data</h1>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
+$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
 
-    if (isset($_POST['number'])) {
-        $number = $_POST['number'];
-        $columns = isset($_POST['columns']) ? $_POST['columns'] : '*';
+$response = array();
 
-        $query = "SELECT $columns FROM guys";
-        if ($number) {
-            $query .= " WHERE id = :id";
+// Retrieve the selected table from the session
+session_start();
+if (isset($_SESSION['selected_table'])) {
+    $selectedTable = $_SESSION['selected_table'];
+
+    // Fetch all data from the selected table
+    $dataQuery = "SELECT * FROM $selectedTable";
+    $dataResult = $database->query($dataQuery);
+
+    if ($dataResult !== false) {
+        // Check if any data exists in the table
+        if ($dataResult->numColumns() > 0) {
+            // Create a table to display the data
+            echo '<table>';
+            echo '<tr>';
+
+            // Fetch the column names and display them as table headers
+            for ($i = 0; $i < $dataResult->numColumns(); $i++) {
+                $columnName = $dataResult->columnName($i);
+                echo "<th>$columnName</th>";
+            }
+
+            echo '</tr>';
+
+            // Fetch each row of data and display it as table rows
+            while ($row = $dataResult->fetchArray(SQLITE3_ASSOC)) {
+                echo '<tr>';
+                foreach ($row as $columnValue) {
+                    echo "<td>$columnValue</td>";
+                }
+                echo '</tr>';
+            }
+
+            echo '</table>';
+        } else {
+            echo "Table has no data.";
         }
-
-        $statement = $database->prepare($query);
-
-        if ($number) {
-            $statement->bindValue(':id', $number, SQLITE3_INTEGER);
-        }
-
-        $result = $statement->execute();
-
-        $data = array();
-
-        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-            $data[] = $row;
-        }
-
-        // Close the database connection
-        $database->close();
-
-        // Convert the data array to JSON format
-        $json_data = json_encode($data);
-
-        // Encode the JSON data for URL
-        $encoded_data = urlencode($json_data);
-
-        // Redirect to select.html with the encoded data as URL parameter
-        header("Location: select.html?data=$encoded_data");
-        exit();
+    } else {
+        echo "Error retrieving data from table: $selectedTable";
     }
+} else {
+    echo "Table not selected.";
 }
-?>
 
+$database->close();
+?>
+</body>
+</html>

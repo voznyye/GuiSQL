@@ -11,10 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $database->exec($query);
 
         if ($result !== false) {
+            // Set the HTTP status code to 200 (OK)
+            http_response_code(200);
             echo "Table dropped successfully!";
         } else {
+            // Set the HTTP status code to 500 (Internal Server Error)
+            http_response_code(500);
             echo "Error dropping table.";
         }
+    } else {
+        // Set the HTTP status code to 400 (Bad Request)
+        http_response_code(400);
+        echo "Invalid request.";
     }
 }
 
