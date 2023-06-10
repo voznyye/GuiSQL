@@ -9,32 +9,32 @@ if (isset($_SESSION['selected_table'])) {
     $response = array();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['oldColumnName']) && isset($_POST['newColumnName'])) {
-            $oldColumnName = $_POST['oldColumnName'];
+        if (isset($_POST['newColumnName']) && isset($_POST['columnType'])) {
             $newColumnName = $_POST['newColumnName'];
+            $columnType = $_POST['columnType'];
 
-            // Prepare the ALTER TABLE statement to rename the column
-            $alterTableQuery = "ALTER TABLE $selectedTable RENAME COLUMN $oldColumnName TO $newColumnName";
+            // Prepare the ALTER TABLE statement to add a new column with the chosen column type
+            $alterTableQuery = "ALTER TABLE $selectedTable ADD COLUMN $newColumnName $columnType";
 
             // Execute the ALTER TABLE statement
             $result = $database->exec($alterTableQuery);
 
             if ($result) {
                 $response['success'] = true;
-                $response['message'] = 'Column name changed successfully!';
+                $response['message'] = 'New column added successfully!';
 
                 // Set the HTTP status code to 200 (OK)
                 http_response_code(200);
             } else {
                 $response['success'] = false;
-                $response['message'] = 'Error changing column name.';
+                $response['message'] = 'Error adding new column.';
 
                 // Set the HTTP status code to 500 (Internal Server Error)
                 http_response_code(500);
             }
         } else {
             $response['success'] = false;
-            $response['message'] = 'Column names not provided.';
+            $response['message'] = 'Column name or type not provided.';
 
             // Set the HTTP status code to 400 (Bad Request)
             http_response_code(400);

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add New Column</title>
+</head>
+<body>
+<h1>Add New Column</h1>
+
+<form method="POST" action="add_column.php">
+  <label for="newColumnName">Column Name:</label>
+  <input type="text" name="newColumnName" id="newColumnName" required><br><br>
+
+  <label for="columnType">Column Type:</label>
+  <select name="columnType" id="columnType" required>
+    <option value="INTEGER">INTEGER</option>
+    <option value="TEXT">TEXT</option>
+    <option value="REAL">REAL</option>
+  </select><br><br>
+
+  <input type="submit" value="Add Column">
+</form>
+</body>
+</html>

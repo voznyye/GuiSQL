@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $selectedTable) {
     <h3>Work with tables</h3>
     <li><a href="tableWork/createTable/create.html">Create Table</a></li>
     <li><a href="tableWork/updateTable/update.html">Update Table</a></li>
+    <li><a href="tableWork/updateTable/add_column.html">Add Column</a></li>
+    <li><a href="tableWork/updateTable/delete_column.html">Delete Column</a></li>
     <li><a href="tableWork/dropTable/drop.html">Drop Table</a></li>
 
     <h3>Select a table:</h3>

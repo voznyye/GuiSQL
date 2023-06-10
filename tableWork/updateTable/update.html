@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Update Table</title>
+    <title>Change Column Names</title>
 </head>
 <body>
-<form method="POST" action="update.php">
-    <label for="table_name">Table Name:</label>
-    <input type="text" id="table_name" name="table_name">
+<h1>Change Column Names</h1>
+<form action="update.php" method="post">
+    <label for="oldColumnName">Old Column Name:</label>
+    <input type="text" id="oldColumnName" name="oldColumnName" required>
     <br>
-    <label for="id">ID:</label>
-    <input type="number" id="id" name="id">
+    <label for="newColumnName">New Column Name:</label>
+    <input type="text" id="newColumnName" name="newColumnName" required>
     <br>
-    <label for="column_names">Column Names:</label>
-    <input type="text" id="column_names" name="column_names[]" multiple>
-    <br>
-    <label for="column_values">Column Values:</label>
-    <input type="text" id="column_values" name="column_values[]" multiple>
-    <br>
-    <button type="submit">Update Table</button>
+    <input type="submit" value="Change Column Name">
 </form>
 </body>
 </html>
