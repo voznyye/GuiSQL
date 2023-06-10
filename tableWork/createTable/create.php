@@ -9,6 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Ensure that the number of column names matches the number of column types
         if (count($columnNames) === count($columnTypes)) {
+            // Add the first column with id INTEGER PRIMARY KEY AUTOINCREMENT
+            array_unshift($columnNames, 'id');
+            array_unshift($columnTypes, 'INTEGER PRIMARY KEY');
+
             // Build the CREATE TABLE query dynamically
             $query = "CREATE TABLE IF NOT EXISTS $tableName (";
             for ($i = 0; $i < count($columnNames); $i++) {

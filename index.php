@@ -44,15 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $selectedTable) {
     <?php } ?>
 
     <h3>Work with data</h3>
-    <li><a href="dataWork/insert/insert.html">Insert Data</a></li>
+    <li><a href="dataWork/insert/insertFront.php">Insert Data</a></li>
     <li><a href="dataWork/select/select.php">Select Data</a></li>
-    <li><a href="dataWork/update/update.html">Update Data</a></li>
+    <li><a href="dataWork/update/updateFront.php">Update Data</a></li>
     <li><a href="dataWork/delete/delete.html">Delete Data</a></li>
 
     <h3>Work with tables</h3>
     <li><a href="tableWork/createTable/create.html">Create Table</a></li>
     <li><a href="tableWork/updateTable/update.html">Update Table</a></li>
-    <li><a href="tableWork/viewTable/view.html">Update Table</a></li>
     <li><a href="tableWork/dropTable/drop.html">Drop Table</a></li>
 
     <h3>Select a table:</h3>
