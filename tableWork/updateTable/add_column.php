@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['selected_table'])) {
     $selectedTable = $_SESSION['selected_table'];
 
-    $database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
+    $database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/PutYourDatabaseHere/Huel.db');
 
     $response = array();
 

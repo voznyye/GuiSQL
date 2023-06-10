@@ -8,7 +8,7 @@
 <h1>Select Data</h1>
 
 <?php
-$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
+$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/PutYourDatabaseHere/Huel.db');
 
 $response = array();
 

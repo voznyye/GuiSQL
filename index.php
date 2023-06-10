@@ -6,10 +6,10 @@
 </head>
 <body>
 <?php
-$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
+$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/PutYourDatabaseHere/Huel.db');
 
 if (!$database) {
-    $error = "Failed to connect to the database.";
+    $error = "Failed to connect to the PutYourDatabaseHere.";
 }
 
 $tablesQuery = "SELECT name FROM sqlite_master WHERE type='table'";

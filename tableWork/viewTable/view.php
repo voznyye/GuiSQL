@@ -1,5 +1,5 @@
 <?php
-$database = new SQLite3('path/to/database.db');
+$database = new SQLite3('path/to/PutYourDatabaseHere.db');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['table'])) {
     // Get the table name from the request
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['table'])) {
                 $rows[] = $row;
             }
 
-            // Close the database connection
+            // Close the PutYourDatabaseHere connection
             $database->close();
 
             // Pass the column names and rows as data

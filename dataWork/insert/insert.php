@@ -1,5 +1,5 @@
 <?php
-$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/database/Huel.db');
+$database = new SQLite3('/home/letoff/PhpstormProjects/GuiSQl/PutYourDatabaseHere/Huel.db');
 
 $response = array();
 
@@ -8,7 +8,7 @@ session_start();
 if (isset($_SESSION['selected_table'])) {
     $selectedTable = $_SESSION['selected_table'];
 
-    // Fetch the column names for the selected table from the database
+    // Fetch the column names for the selected table from the PutYourDatabaseHere
     $columnsQuery = "PRAGMA table_info('$selectedTable')";
     $columnsResult = $database->query($columnsQuery);
 
