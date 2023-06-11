@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert Data</title>
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
 <h1>Insert Data</h1>

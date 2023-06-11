@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Start Page</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 <?php
